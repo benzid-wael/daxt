@@ -14,11 +14,20 @@ class FakeMessage extends Message {
     protected int intField;
     protected String stringField;
 
-    public FakeMessage(String uid, String topic, int intField, String stringField, boolean isDomainKnowledge, boolean alwaysConvey) {
-        super(uid, topic, isDomainKnowledge, alwaysConvey);
+    public FakeMessage(String topic, int intField, String stringField, boolean isDomainKnowledge, boolean alwaysConvey) {
+        super(topic, isDomainKnowledge, alwaysConvey);
 
         this.intField = intField;
         this.stringField = stringField;
+    }
+
+    public HashMap<String, Object> export() {
+        HashMap<String, Object> hmap = new HashMap<String, Object>();
+        hmap.put("topic", this.topic);
+        hmap.put("intField", this.intField);
+        hmap.put("stringField", this.stringField);
+
+        return hmap;
     }
 }
 
@@ -45,7 +54,7 @@ public class MessageTest extends TestCase {
 
     public void testIsConveyableReturnsFalseForDomainKnowledgeMessages() throws Exception {
         // Given
-        Message testee = new FakeMessage("1", "main", 12, "foo", true, false);
+        Message testee = new FakeMessage("main", 12, "foo", true, false);
 
         // When
         boolean actual = testee.isConveyable();
@@ -56,7 +65,7 @@ public class MessageTest extends TestCase {
 
     public void testIsConveyableReturnsTrueForStandaloneDomainKnowledgeMessages() throws Exception {
         // Given
-        Message testee = new FakeMessage("1", "main", 12, "foo", true, true);
+        Message testee = new FakeMessage("main", 12, "foo", true, true);
 
         // When
         boolean actual = testee.isConveyable();
@@ -67,7 +76,7 @@ public class MessageTest extends TestCase {
 
     public void testExport() throws Exception {
         // Given
-        Message testee = new FakeMessage("1", "main", 12, "foo", false, false);
+        Message testee = new FakeMessage("main", 12, "foo", false, false);
         HashMap<String, Object> expected = new HashMap<String, Object>() {{
             put("topic", "main");
             put("intField", 12);

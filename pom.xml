@@ -8,6 +8,17 @@
   <name>daxt</name>
   <url>http://maven.apache.org</url>
 
+  <distributionManagement>
+    <repository>
+      <id>packagecloud-wbenxid</id>
+      <url>packagecloud+https://packagecloud.io/wbenzid/daxt</url>
+    </repository>
+    <snapshotRepository>
+      <id>packagecloud-wbenzid</id>
+      <url>packagecloud+https://packagecloud.io/wbenzid/daxt</url>
+    </snapshotRepository>
+  </distributionManagement>
+
   <properties>
     <!-- https://maven.apache.org/general.html#encoding-warning -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -89,6 +100,15 @@
       </plugin>
 
     </plugins>
+
+    <extensions>
+      <extension>
+        <groupId>io.packagecloud.maven.wagon</groupId>
+        <artifactId>maven-packagecloud-wagon</artifactId>
+        <version>0.0.4</version>
+      </extension>
+    </extensions>
+
   </build>
 
 </project>
