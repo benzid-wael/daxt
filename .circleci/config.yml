@@ -33,4 +33,4 @@ jobs: # a collection of steps
       # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
       - run:
           name: Upload packagecloud.io
-          command: mvn -s settings.xml -DskipTests deploy
+          command: mvn -s .circleci/settings.xml -DskipTests deploy
