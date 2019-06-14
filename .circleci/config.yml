@@ -19,8 +19,8 @@ jobs: # a collection of steps
           key: circleci-daxt-java8-{{ checksum "pom.xml" }}
 
       - run:
-        name: Build JAR
-        command: mvn package # run the actual tests
+          name: Build JAR
+          command: mvn package # run the actual tests
 
       - store_test_results: # uploads the test metadata from the `target/surefire-reports` directory so that it can show up in the CircleCI dashboard.
           # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
@@ -31,6 +31,4 @@ jobs: # a collection of steps
           path: target/daxt-1.0-SNAPSHOT.jar
 
       # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
-      - run:
-        name: Upload to packagecloud.io
-        command: mvn -s settings.xml -DskipTests deploy
+      - run: mvn -s settings.xml -DskipTests deploy
