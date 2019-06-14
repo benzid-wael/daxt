@@ -67,6 +67,7 @@
         <version>2.12</version>
         <configuration>
           <skipTests>true</skipTests>
+          <useSystemClassLoader>false</useSystemClassLoader>
         </configuration>
         <executions>
           <execution>
