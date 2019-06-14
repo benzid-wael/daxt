@@ -101,6 +101,7 @@
 
     </plugins>
 
+    <!-- This plugin is needed only to upload artifacts to packagecloud -->
     <extensions>
       <extension>
         <groupId>io.packagecloud.maven.wagon</groupId>
