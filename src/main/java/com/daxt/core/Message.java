@@ -1,14 +1,16 @@
 package com.daxt.core;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 
 public abstract class Message {
-    protected boolean isKnowledgeBase = false;
-    protected boolean conveyAlways = false;
-    protected String topic;
+    private boolean isKnowledgeBase;
+    private boolean conveyAlways;
+    private String topic;
 
-    /* Public Constructor */
+    /* Constructors */
     public Message(String topic) {
         this(topic, false, false);
     }
@@ -23,7 +25,11 @@ public abstract class Message {
         this.conveyAlways = conveyAlways;
     }
 
-    /* Methods */
+    /* Public Methods */
+    public String getTopic() {
+        return this.topic;
+    }
+
     public String getMessageType() {
         return this.getClass().getSimpleName();
     }
@@ -40,6 +46,28 @@ public abstract class Message {
     public boolean isConveyable() {
         return (!isKnowledgeBase && this.isRelevant()) || conveyAlways;
     }
+
+    ArrayList<Information> toList() {
+        ArrayList<Information> informations = new ArrayList<>();
+        HashMap<String, Object> serializedMessage = this.export();
+        Iterator entries = serializedMessage.entrySet().iterator();
+        while (entries.hasNext()) {
+            HashMap.Entry entry = (HashMap.Entry) entries.next();
+            String name = (String) entry.getKey();
+            if (name.equals("topic"))
+                continue;
+
+            Object value = entry.getValue();
+            informations.add(new Information(this.topic, name, value));
+        }
+
+        return informations;
+    }
+
+    /*
+     * Define message's priority.
+     */
+    public abstract Priority getPriority();
 
     public abstract HashMap<String, Object> export();
 }

@@ -8,17 +8,6 @@
   <name>daxt</name>
   <url>http://maven.apache.org</url>
 
-  <distributionManagement>
-    <repository>
-      <id>packagecloud-wbenzid</id>
-      <url>packagecloud+https://packagecloud.io/wbenzid/daxt</url>
-    </repository>
-    <snapshotRepository>
-      <id>packagecloud-wbenzid</id>
-      <url>packagecloud+https://packagecloud.io/wbenzid/daxt</url>
-    </snapshotRepository>
-  </distributionManagement>
-
   <properties>
     <!-- https://maven.apache.org/general.html#encoding-warning -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -61,7 +50,21 @@
   <build>
     <plugins>
 
-      <plugin>
+        <plugin>
+            <groupId>com.github.spotbugs</groupId>
+            <artifactId>spotbugs-maven-plugin</artifactId>
+            <version>3.1.11</version>
+            <dependencies>
+                <!-- overwrite dependency on spotbugs if you want to specify the version of spotbugs -->
+                <dependency>
+                    <groupId>com.github.spotbugs</groupId>
+                    <artifactId>spotbugs</artifactId>
+                    <version>4.0.0-beta2</version>
+                </dependency>
+            </dependencies>
+        </plugin>
+
+        <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId> <!-- surefire plugin version managed by Spring Boot -->
         <version>2.12</version>
@@ -112,5 +115,17 @@
     </extensions>
 
   </build>
+
+    <!-- Deployment -->
+    <distributionManagement>
+        <repository>
+            <id>packagecloud-wbenzid</id>
+            <url>packagecloud+https://packagecloud.io/wbenzid/daxt</url>
+        </repository>
+        <snapshotRepository>
+            <id>packagecloud-wbenzid</id>
+            <url>packagecloud+https://packagecloud.io/wbenzid/daxt</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 </project>

@@ -1,18 +1,19 @@
 package com.daxt.core;
 
-import java.util.HashMap;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 
 class FakeMessage extends Message {
-    protected int intField;
-    protected String stringField;
+    private int intField;
+    private String stringField;
 
     public FakeMessage(String topic, int intField, String stringField, boolean isDomainKnowledge, boolean alwaysConvey) {
         super(topic, isDomainKnowledge, alwaysConvey);
@@ -21,9 +22,13 @@ class FakeMessage extends Message {
         this.stringField = stringField;
     }
 
+    public Priority getPriority() {
+        return Priority.LOW;
+    }
+
     public HashMap<String, Object> export() {
-        HashMap<String, Object> hmap = new HashMap<String, Object>();
-        hmap.put("topic", this.topic);
+        HashMap<String, Object> hmap = new HashMap<>();
+        hmap.put("topic", this.getTopic());
         hmap.put("intField", this.intField);
         hmap.put("stringField", this.stringField);
 
@@ -87,6 +92,21 @@ public class MessageTest extends TestCase {
         HashMap<String, Object> actual = testee.export();
 
         // Then
-        assertTrue(expected.equals(actual));
+        assertEquals(expected, actual);
+    }
+
+    public void testToList() throws Exception {
+        // Given
+        Message testee = new FakeMessage("main", 12, "foo", false, false);
+        ArrayList<Information> expected = new ArrayList<Information>() {{
+            add(new Information("main", "intField", 12));
+            add(new Information("main", "stringField", "foo"));
+        }};
+
+        // When
+        ArrayList<Information> actual = testee.toList();
+
+        // Then
+        assertEquals(expected, actual);
     }
 }
