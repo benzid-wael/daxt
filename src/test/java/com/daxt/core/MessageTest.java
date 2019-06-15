@@ -1,40 +1,15 @@
 package com.daxt.core;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-
-class FakeMessage extends Message {
-    private int intField;
-    private String stringField;
-
-    public FakeMessage(String topic, int intField, String stringField, boolean isDomainKnowledge, boolean alwaysConvey) {
-        super(topic, isDomainKnowledge, alwaysConvey);
-
-        this.intField = intField;
-        this.stringField = stringField;
-    }
-
-    public Priority getPriority() {
-        return Priority.LOW;
-    }
-
-    public HashMap<String, Object> export() {
-        HashMap<String, Object> hmap = new HashMap<>();
-        hmap.put("topic", this.getTopic());
-        hmap.put("intField", this.intField);
-        hmap.put("stringField", this.stringField);
-
-        return hmap;
-    }
-}
+import com.daxt.factories.FakeMessage;
 
 
 public class MessageTest extends TestCase {
