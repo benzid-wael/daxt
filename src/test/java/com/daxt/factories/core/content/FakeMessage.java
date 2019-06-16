@@ -1,9 +1,9 @@
-package com.daxt.factories;
+package com.daxt.factories.core.content;
 
 import java.util.HashMap;
 
-import com.daxt.core.Message;
-import com.daxt.core.Priority;
+import com.daxt.core.content.Message;
+import com.daxt.core.content.Priority;
 
 
 public class FakeMessage extends Message {

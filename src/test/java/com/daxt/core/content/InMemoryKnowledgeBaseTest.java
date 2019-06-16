@@ -1,7 +1,7 @@
-package com.daxt.core;
+package com.daxt.core.content;
 
-import com.daxt.factories.FakeMessage;
-import com.daxt.factories.MetadataMessage;
+import com.daxt.factories.core.content.FakeMessage;
+import com.daxt.factories.core.content.MetadataMessage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

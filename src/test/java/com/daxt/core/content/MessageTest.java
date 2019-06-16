@@ -1,4 +1,4 @@
-package com.daxt.core;
+package com.daxt.core.content;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,7 +9,7 @@ import junit.framework.TestSuite;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-import com.daxt.factories.FakeMessage;
+import com.daxt.factories.core.content.FakeMessage;
 
 
 public class MessageTest extends TestCase {

@@ -1,4 +1,4 @@
-package com.daxt.core;
+package com.daxt.core.content;
 
 
 public class Information {
