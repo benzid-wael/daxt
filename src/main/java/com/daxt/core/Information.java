@@ -44,15 +44,18 @@ public class Information {
         this.value = value;
     }
 
+    public boolean isGeneral() { return this.topic == null; }
+
     public String toString() {
-        return "<Information [" + this.topic + "]: " + this.name + "=" + this.value + ">";
+        String topic = this.isGeneral() ? "G" : "#" + getTopic();
+        return "<Information " + topic + " " + this.name + "=" + this.value + ">";
     }
 
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Information) {
             Information other = (Information) obj;
-            return this.topic.equals(other.topic) && this.name.equals(other.name) && this.value == other.value;
+            return this.topic == other.topic && this.name.equals(other.name) && this.value == other.value;
         }
         return false;
     }

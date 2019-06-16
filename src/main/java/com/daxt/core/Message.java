@@ -30,7 +30,7 @@ public abstract class Message {
         return this.topic;
     }
 
-    public String getMessageType() {
+    public String getType() {
         return this.getClass().getSimpleName();
     }
 
