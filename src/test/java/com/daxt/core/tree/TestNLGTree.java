@@ -2,20 +2,19 @@ package com.daxt.core.tree;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 
 abstract class Shape extends NLGTree<Shape> {
-    public abstract void draw(String fillColor);
     private String uid;
+
     protected boolean isComposite() { return false; }
+    public abstract void draw(String fillColor);
 
     public Shape(String uid) { this.uid = uid; }
-
-    @Override
-    public String toString() {
-        return "<" + this.getClass().toString() + " #" + this.uid + ">";
-    }
 }
 
 class Triangle extends Shape {
@@ -156,6 +155,66 @@ public class TestNLGTree {
         assertEquals(2, this.t1.getLevel());
         assertEquals(2, this.t2.getLevel());
         assertEquals(2, this.c1.getLevel());
+    }
+
+    @Test
+    public void lengthReturnsTwoWhenCalledWithOneLevelTree() {
+        // Given
+        Shape testee = this.oneLevelDrawingTree;
+        // When
+        int actual = testee.length();
+        // Then
+        assertEquals(3, actual);
+    }
+
+    @Test
+    public void heightReturnsOneWhenCalledWithEmptyTree() {
+        // Given
+        Shape testee = new Drawing("temp");
+        // When
+        int actual = testee.height();
+        // Then
+        assertEquals(1, actual);
+    }
+
+    @Test
+    public void heightReturnsTwoWhenCalledWithOneLevelTree() {
+        // Given
+        Shape testee = this.oneLevelDrawingTree;
+        // When
+        int actual = testee.height();
+        // Then
+        assertEquals(2, actual);
+    }
+
+    @Test
+    public void rootReturnsRootElementWhenFromLeaves() {
+        assertEquals(this.oneLevelDrawingTree, this.t1.root());
+        assertEquals(this.oneLevelDrawingTree, this.t2.root());
+        assertEquals(this.oneLevelDrawingTree, this.c1.root());
+    }
+
+    @Test
+    public void leavesRemovesNonLeafNodes() {
+        // given
+        ArrayList<NLGElement<Shape>> expected = new ArrayList<>();
+        expected.add(this.t1);
+        expected.add(this.c1);
+        expected.add(this.t2);
+        // When
+        ArrayList<NLGElement<Shape>> actual = this.oneLevelDrawingTree.leaves();
+        // Then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void leavesRetutnsEmptyListWhenCalledWithEmptyTree() {
+        // Given
+        Drawing testee = new Drawing("empty");
+        // When
+        ArrayList<NLGElement<Shape>> actual = testee.leaves();
+        // Then
+        assertTrue(actual.size() == 0);
     }
 }
 
