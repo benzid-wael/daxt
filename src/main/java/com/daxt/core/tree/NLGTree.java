@@ -28,7 +28,9 @@ public abstract class NLGTree<Parent extends NLGTree<Parent>> extends NLGElement
 
     public boolean isLeaf() { return children.size() == 0; }
 
-    protected boolean isComposite() { return false; };
+    protected boolean isComposite() {
+        return false;
+    }
 
     public ArrayList<NLGElement<Parent>> getChildren() {
         return this.children;
@@ -64,7 +66,7 @@ public abstract class NLGTree<Parent extends NLGTree<Parent>> extends NLGElement
      */
     public int height() {
         try {
-            int maxChildHeight =  children.stream()
+            int maxChildHeight = children.stream()
                     .map(child -> ((NLGTree<Parent>) child).height())
                     .max((x, y) -> Integer.compare(x, y))
                     .get();
