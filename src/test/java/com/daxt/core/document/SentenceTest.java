@@ -75,6 +75,6 @@ public class SentenceTest {
         // Given
         this.sentence.setRealization("For the 2nd time in this season, Ronaldo manage to open the score within the first 10 minutes.");
         // When / Then
-        assertTrue(this.sentence.generated());
+        assertTrue(this.sentence.isRealized());
     }
 }

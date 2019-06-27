@@ -29,14 +29,14 @@ public class Sentence extends DocumentPart {
     }
 
     public void setRealization(String text) throws AlreadyRealized {
-        if (this.text == null) {
+        if (!this.isRealized()) {
             this.text = text;
         } else {
             throw new AlreadyRealized();
         }
     }
 
-    public boolean generated() {
+    public boolean isRealized() {
         return this.text != null;
     }
 
